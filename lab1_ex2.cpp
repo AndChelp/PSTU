@@ -1,10 +1,11 @@
 #include <iostream>
 
+using namespace std;
 int main() {
     int m, n = 10;
-    std::cout << m - ++n << "\n";
+    cout << m - ++n << "\n";
     m = n = 10;
-    std::cout << (++m > --n) << "\n";
+    cout << (++m > --n) << "\n";
     m = n = 10;
-    std::cout << (--m < ++n);
+    cout << (--m < ++n);
 }
