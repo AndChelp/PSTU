@@ -10,7 +10,8 @@ int intInput(const string &str) {
 }
 
 void fillRandom(int *array, int &size) {
-    srand(size);
+    int seed = intInput("Seed: ");
+    srand(seed);
     for (int i = 0; i < size; ++i) {
         array[i] = rand() % 100 + 1;
     }
@@ -25,7 +26,7 @@ void deleteItem(int *array, int &size, int &delIndex) {
 
 void printArray(int *array, int &size) {
     for (int i = 0; i < size; ++i) {
-        cout << array[i] << " ";
+        cout << array[i] << "\t";
     }
     cout << "\n";
 }
