@@ -46,7 +46,7 @@ void addItem(int *array, int &size) {
 
 int main() {
     int size = intInput("Размер массива: ");
-    int rndArray[size];
+    int *rndArray = new int[size];
     fillRandom(rndArray, size);
     printArray(rndArray, size);
     int delIndex = intInput("Номер элемента массива для удаления: ") - 1;
