@@ -33,7 +33,7 @@ void fillStatic(int (&targetArray)[_X][_Y]) {
             {6, 9, 7, 3, 2},
             {9, 6, 8, 5, 7},
             {1, 6, 9, 2, 4}
-    };
+    }; // x=2, y=0; x=3, y=3
     for (int i = 0; i < _X; i++) {
         for (int j = 0; j < _Y; j++) {
             targetArray[j][i] = sourceArray[i][j];
@@ -80,7 +80,7 @@ int findMaxY(int (&array)[_X][_Y], int x) {
     return minOrMax(array, x, false, false);
 }
 
-void test(int (&array)[_X][_Y]) {
+void findSaddlePoint(int (&array)[_X][_Y]) {
     for (int i = 0; i < _Y; ++i) {
         int minX = findMinX(array, i);
         int maxX = findMaxX(array, i);
@@ -88,12 +88,11 @@ void test(int (&array)[_X][_Y]) {
         int maxY = findMaxY(array, minX);
         int minY = findMinY(array, maxX);
 
-
         if (maxY == i) {
-            cout << i << ") " << minX << " " << maxY << "\n";
+            cout << "x=" << minX << " y=" << maxY << "\n";
         }
         if (minY == i) {
-            cout << i << ") " << maxX << " " << minY << "\n";
+            cout << "x=" << maxX << " y=" << minY << "\n";
         }
     }
 }
@@ -101,10 +100,7 @@ void test(int (&array)[_X][_Y]) {
 int main() {
     int array[_X][_Y];
     fillStatic(array);
+    //fillRandom(array);
     printArray(array);
-    test(array);
-    /*int minX = findMinX(array, 0);
-    int maxY = findMinY(array, minX);
-
-    cout << minX << " " << maxY << "\n";*/
+    findSaddlePoint(array);
 }
