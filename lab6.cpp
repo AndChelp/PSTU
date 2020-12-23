@@ -11,7 +11,8 @@ void shift(char *string, int from, int size) {
 
 int main() {
     char str[256];
-    gets(str);
+    std::cout << "Строка: ";
+    gets_s(str);
     int strLength = strlen(str);
     int uncheckedLength = strLength;
     for (int i = 0; i < uncheckedLength; ++i) {
@@ -20,5 +21,5 @@ int main() {
             shift(str, i--, strLength - 1);
         }
     }
-    std::cout << str;
+    std::cout << "Результат: " << str;
 }
