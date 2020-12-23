@@ -11,5 +11,5 @@ int main() {
         sum += a;
         n++;
     } while (a > eps);
-    std::cout << sum;
+    std::cout << "Ответ: " << sum;
 }
