@@ -10,6 +10,6 @@ int main() {
         a = 1 / pow(2, n) + 1 / pow(3, n);
         sum += a;
         n++;
-    } while (a > eps);
+    } while (a >= eps);
     std::cout << "Ответ: " << sum;
 }
