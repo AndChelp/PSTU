@@ -16,6 +16,7 @@ int main() {
     int strLength = strlen(str);
     int uncheckedLength = strLength;
     for (int i = 0; i < uncheckedLength; ++i) {
+        //согласно ASCII, все цифры находятся между 48 и 57 кодами
         if (str[i] >= 48 && str[i] <= 57) {
             uncheckedLength--;
             shift(str, i--, strLength - 1);
