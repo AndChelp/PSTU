@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 
+using namespace std;
 int main() {
     double a = 1000;
     double b = 0.0001;
@@ -12,9 +14,9 @@ int main() {
     double upper = ab$3 - (a$3 - _3ab$2);
 
     double b$3 = pow(b, 3);
-    double a$2 = pow(a,2);
+    double a$2 = pow(a, 2);
     double _3a$2b = 3 * a$2 * b;
     double lower = b$3 - _3a$2b;
 
-    std::cout << upper / lower;
+    cout << fixed << setprecision(10) << upper / lower;
 }

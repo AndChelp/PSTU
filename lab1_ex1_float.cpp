@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 
+using namespace std;
 int main() {
     float a = 1000;
     float b = 0.0001;
@@ -16,5 +18,5 @@ int main() {
     float _3a$2b = 3 * a$2 * b;
     float lower = b$3 - _3a$2b;
 
-    std::cout << upper / lower;
+    cout << fixed << setprecision(10) << upper / lower;
 }
