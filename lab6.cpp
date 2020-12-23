@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstring>
 
 void shift(char *string, int from, int size) {
     char number = string[from];
