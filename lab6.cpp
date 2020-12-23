@@ -12,6 +12,7 @@ int main() {
     char str[256];
     std::cout << "Строка: ";
     gets_s(str);
+    //gets(str);
     int strLength = strlen(str);
     int uncheckedLength = strLength;
     for (int i = 0; i < uncheckedLength; ++i) {
