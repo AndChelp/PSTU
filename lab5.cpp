@@ -2,8 +2,9 @@
 
 #define _Y 5
 #define _X 5
-#define _X_or_Y_ isX ? _X : _Y
 
+//сокращения для определения к какой оси массива применять цикл
+#define _X_or_Y_ isX ? _X : _Y
 #define _XorY isX ? i : a
 #define _YorX isX ? a : i
 
@@ -33,7 +34,7 @@ void fillStatic(int (&targetArray)[_X][_Y]) {
             {6, 9, 7, 3, 2},
             {9, 6, 8, 5, 7},
             {1, 6, 9, 2, 4}
-    }; // x=2, y=0; x=3, y=3
+    }; // седловые точки: x=2, y=0; x=3, y=3
     for (int i = 0; i < _X; i++) {
         for (int j = 0; j < _Y; j++) {
             targetArray[j][i] = sourceArray[i][j];
@@ -42,7 +43,6 @@ void fillStatic(int (&targetArray)[_X][_Y]) {
 }
 
 void printArray(int (&array)[_X][_Y]) {
-
     cout << "\n";
     for (int i = 0; i < _Y; ++i) {
         for (int j = 0; j < _X; ++j) {
@@ -52,7 +52,9 @@ void printArray(int (&array)[_X][_Y]) {
     }
 }
 
-int minOrMax(int (&array)[_X][_Y], int a, bool isMin, bool isX) {
+/*универсальная функция поиска минимума или максимума по оси X или Y
+isMin==true => ищет минимум, isX==true => ищет по X*/
+int abstractMinOrMax(int (&array)[_X][_Y], int a, bool isMin, bool isX) {
     int result = 0, i = 0, item = array[_XorY][_YorX];
     for (; i < (_X_or_Y_); ++i) {
         int current = array[_XorY][_YorX];
@@ -65,27 +67,28 @@ int minOrMax(int (&array)[_X][_Y], int a, bool isMin, bool isX) {
 }
 
 int findMinX(int (&array)[_X][_Y], int y) {
-    return minOrMax(array, y, true, true);
+    return abstractMinOrMax(array, y, true, true);
 }
 
 int findMaxX(int (&array)[_X][_Y], int y) {
-    return minOrMax(array, y, false, true);
+    return abstractMinOrMax(array, y, false, true);
 }
 
 int findMinY(int (&array)[_X][_Y], int x) {
-    return minOrMax(array, x, true, false);
+    return abstractMinOrMax(array, x, true, false);
 }
 
 int findMaxY(int (&array)[_X][_Y], int x) {
-    return minOrMax(array, x, false, false);
+    return abstractMinOrMax(array, x, false, false);
 }
 
 void findSaddlePoint(int (&array)[_X][_Y]) {
     for (int i = 0; i < _Y; ++i) {
+        //Поиск седловой точки минимум в строке, максимум в столбце
         int minX = findMinX(array, i);
-        int maxX = findMaxX(array, i);
-
         int maxY = findMaxY(array, minX);
+        //Поиск седловой точки минимум в стобце, максимум в строке
+        int maxX = findMaxX(array, i);
         int minY = findMinY(array, maxX);
 
         if (maxY == i) {
