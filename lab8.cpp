@@ -1,5 +1,4 @@
 #include <iostream>
-#include <utility>
 
 #define SUBJ_COUNT 4
 
