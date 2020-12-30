@@ -57,12 +57,12 @@ bool checkKid(Schoolkid kid) {
 
 void printFile(const char *path) {
     FILE *fPointer = openFile(path, "rt");
-    auto *kidBuffer = new Schoolkid();
-    while (fread(kidBuffer, sizeof(Schoolkid), 1, fPointer) > 0) {
-        cout << "ФИО: " << kidBuffer->fio << "\n";
-        cout << "Класс: " << kidBuffer->classNumber << "\n";
-        cout << "Номер телефона: " << kidBuffer->phoneNumber << "\n";
-        for (auto &grade : kidBuffer->subjectGrades) {
+    Schoolkid kidBuffer;
+    while (fread(&kidBuffer, sizeof(Schoolkid), 1, fPointer) > 0) {
+        cout << "ФИО: " << kidBuffer.fio << "\n";
+        cout << "Класс: " << kidBuffer.classNumber << "\n";
+        cout << "Номер телефона: " << kidBuffer.phoneNumber << "\n";
+        for (auto &grade : kidBuffer.subjectGrades) {
             cout << grade.lessonName << ": " << grade.gradeValue << "\n";
         }
         cout << "----------------------\n";
