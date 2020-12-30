@@ -19,19 +19,19 @@ struct Schoolkid {
 template<class T>
 void input(T &value, const char *strOutput) {
     cout << strOutput << ": ";
-    while(!(cin >> value)){
+    while (!(cin >> value)) {
         cout << "Incorrect value!\n";
         cin.clear();
         cin.ignore(INT_MAX, '\n');
     }
 }
 
-Schoolkid *inputSchoolkid() {
-    auto *kid = new Schoolkid();
-    input(kid->fio, "ФИО");
-    input(kid->classNumber, "Класс");
-    input(kid->phoneNumber, "Номер телефона");
-    for (auto &grade : kid->subjectGrades) {
+Schoolkid inputSchoolkid() {
+    Schoolkid kid;
+    input(kid.fio, "ФИО");
+    input(kid.classNumber, "Класс");
+    input(kid.phoneNumber, "Номер телефона");
+    for (auto &grade : kid.subjectGrades) {
         input(grade.gradeValue, grade.lessonName);
     }
     return kid;
@@ -75,7 +75,8 @@ void saveData(const char *path) {
     input(count, "Количество записей");
     FILE *fPointer = openFile(path, "wt");
     for (int i = 0; i < count; ++i) {
-        fwrite(inputSchoolkid(), sizeof(Schoolkid), 1, fPointer);
+        Schoolkid kidBuffer = inputSchoolkid();
+        fwrite(&kidBuffer, sizeof(Schoolkid), 1, fPointer);
         cout << "----------------------\n";
     }
     fclose(fPointer);
@@ -84,11 +85,11 @@ void saveData(const char *path) {
 void deleteData(const char *src) {
     FILE *srcFile = openFile(src, "rt");
     FILE *tmpFile = openFile("tmp.txt", "wt");
-    auto *kidBuffer = new Schoolkid();
-    while (fread(kidBuffer, sizeof(Schoolkid), 1, srcFile) > 0) {
+    Schoolkid kidBuffer;
+    while (fread(&kidBuffer, sizeof(Schoolkid), 1, srcFile) > 0) {
         //Копируем, елси проходит проверку
-        if (checkKid(*kidBuffer)) {
-            fwrite(kidBuffer, sizeof(Schoolkid), 1, tmpFile);
+        if (checkKid(kidBuffer)) {
+            fwrite(&kidBuffer, sizeof(Schoolkid), 1, tmpFile);
         }
     }
     fclose(srcFile);
@@ -96,8 +97,8 @@ void deleteData(const char *src) {
     tmpFile = openFile("tmp.txt", "rt");
     srcFile = openFile(src, "wt");
     //Копирование в исходный файл
-    while (fread(kidBuffer, sizeof(Schoolkid), 1, tmpFile) > 0) {
-        fwrite(kidBuffer, sizeof(Schoolkid), 1, srcFile);
+    while (fread(&kidBuffer, sizeof(Schoolkid), 1, tmpFile) > 0) {
+        fwrite(&kidBuffer, sizeof(Schoolkid), 1, srcFile);
     }
     fclose(srcFile);
     fclose(tmpFile);
@@ -107,12 +108,12 @@ void deleteData(const char *src) {
 void pushData(const char *src) {
     FILE *srcFile = openFile(src, "rt");
     FILE *tmpFile = openFile("tmp.txt", "wt");
-    auto *kidBuffer = inputSchoolkid();
+    Schoolkid kidBuffer = inputSchoolkid();
     //Добавление новой записи в начало файла
-    fwrite(kidBuffer, sizeof(Schoolkid), 1, tmpFile);
+    fwrite(&kidBuffer, sizeof(Schoolkid), 1, tmpFile);
     //Добавление остальных записей
-    while (fread(kidBuffer, sizeof(Schoolkid), 1, srcFile) > 0) {
-        fwrite(kidBuffer, sizeof(Schoolkid), 1, tmpFile);
+    while (fread(&kidBuffer, sizeof(Schoolkid), 1, srcFile) > 0) {
+        fwrite(&kidBuffer, sizeof(Schoolkid), 1, tmpFile);
     }
     fclose(srcFile);
     fclose(tmpFile);
@@ -120,8 +121,8 @@ void pushData(const char *src) {
     tmpFile = openFile("tmp.txt", "rt");
     srcFile = openFile(src, "wt");
     //Копирование в исходный файл
-    while (fread(kidBuffer, sizeof(Schoolkid), 1, tmpFile) > 0) {
-        fwrite(kidBuffer, sizeof(Schoolkid), 1, srcFile);
+    while (fread(&kidBuffer, sizeof(Schoolkid), 1, tmpFile) > 0) {
+        fwrite(&kidBuffer, sizeof(Schoolkid), 1, srcFile);
     }
     fclose(srcFile);
     fclose(tmpFile);
