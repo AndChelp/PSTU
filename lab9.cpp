@@ -41,7 +41,7 @@ int main() {
     fclose(trgFile);
 
     //Подсчет гласных
-    set<char> vowels = {'A', 'a', 'E', 'e', 'I', 'i', 'Y', 'y', 'U', 'u'};
+    set<char> vowels = {'A', 'a', 'E', 'e', 'I', 'i', 'Y', 'y', 'U', 'u', 'O', 'o'};
     int vowelCount = 0;
     trgFile = openFile(trgPath, "rt");
     while (fgets(buffer, STR_LENGTH, trgFile)) {
