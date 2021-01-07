@@ -85,6 +85,7 @@ int main() {
     matrix.deleteRow(delRowIndex);
     cout << "После удаления: \n";
     printMatrix(matrix);
+    //Очищение матрицы произойдет в деструкторе при завершении программы
 }
 
 
