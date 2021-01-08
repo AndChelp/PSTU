@@ -17,7 +17,7 @@ int fact(int x) {
 }
 
 void byE() {
-    double e = 0.01;
+    double e = 0.0001;
     double summ, j;
     int i = 0;
     for (double x = a; x < b; x += step) {
@@ -28,7 +28,7 @@ void byE() {
             j = cos(i * PI / 4) / fact(i) * pow(x, i);
             summ += j;
         } while (j >= e);
-        cout << summ << "; ";
+        cout << summ << ";\n";
     }
 }
 
@@ -43,7 +43,7 @@ void byN() {
         for (int i = 1; i <= n; ++i) {
             summ += cos(i * PI / 4) / fact(i) * pow(x, i);
         }
-        cout << summ << "; ";
+        cout << summ << ";\n";
     }
 }
 
@@ -52,8 +52,8 @@ void byN() {
 void exact() {
     for (double x = a; x < b; x += step) {
         cout << "f(" << x << ")="
-             << pow(E, x * cos(PI / 4) * cos(x * sin(PI / 4)))
-             << "; ";
+             << pow(E, x * cos(PI / 4)) * cos(x * sin(PI / 4))
+             << ";\n";
     }
 }
 
