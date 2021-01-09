@@ -19,8 +19,9 @@ int fact(int x) {
 void byE() {
     double e = 0.0001;
     double summ, j;
-    int i = 0;
+    int i;
     for (double x = a; x < b; x += step) {
+        i = 0;
         summ = 1;
         cout << "f(" << x << ")=";
         do {
@@ -58,10 +59,10 @@ void exact() {
 }
 
 int main() {
-    cout << "Точное значение: \n";
+    /*cout << "Точное значение: \n";
     exact();
     cout << "\nВычисление по N: \n";
     byN();
-    cout << "\nВычисление по E: \n";
+    cout << "\nВычисление по E: \n";*/
     byE();
 }
