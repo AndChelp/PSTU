@@ -24,11 +24,14 @@ void byE() {
         i = 0;
         summ = 1;
         cout << "f(" << x << ")=";
+        j = 0;
+        double past;
         do {
+            past = j;
             i++;
             j = cos(i * PI / 4) / fact(i) * pow(x, i);
             summ += j;
-        } while (j >= e);
+        } while (abs(j - past) >= e);
         cout << summ << ";\n";
     }
 }
